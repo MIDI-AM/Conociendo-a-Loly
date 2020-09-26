@@ -5,7 +5,6 @@
     <div v-if="principal" class="portada">
       <div class="book-cover-inner">
         <div class="dato">
-          <!-- <h1 class="book-cover-title">Conociendo a Loly</h1> -->
           <form @submit.prevent="addTea">
             <div v-show="datos">
               <input
@@ -32,7 +31,10 @@
             </div>
 
             <div>
-              <h3 v-show="elije" class="elije">¿Quien es tu personaje Favorito?</h3>
+              <!-- <audio class="audiopregunta" :src="this.audiopregunta"></audio> -->
+              <h3 v-show="elije" class="elije">
+                <img @click="pregunta" src="../assets/audiob.gif" alt class="pbtn" /> ¿Quien es tu personaje Favorito?
+              </h3>
             </div>
 
             <div v-show="preguntas" id="example-3">
@@ -94,7 +96,7 @@
                 <span>{{ newTea.personajes }}</span>
               </h6>
             </div>
-            <button v-if="botonconfirmar" type="submit" class="env">Confirmar</button>
+            <button v-if="botonconfirmar" type="submit" @click="win" class="env">Confirmar</button>
 
             <div v-if="botonesdescarga" class="descargas">
               <span @click="download" class="des">Descargar cuento</span>
@@ -141,7 +143,7 @@
         </a>
       </div>
       <div>
-        <a v-if="cerrar" href="http://midi.espol.edu.ec/">
+        <a v-if="cerrar" @onclick="cerrar" href="http://midi.espol.edu.ec">
           <img class="bfu" src="../assets/cerrar.png" alt />
         </a>
       </div>
@@ -153,11 +155,14 @@
 import gsap from "gsap";
 import CuentoVue from "./Cuento.vue";
 import axios from "axios";
-import Firebase, { app } from "firebase";
+import Firebase, { app, functions } from "firebase";
 import config from "../config";
-let cone = Firebase.initializeApp(config);
-let db = cone.database();
+let cone = Firebase.initializeApp(config); //conexion con firebase viene del archivo config sdk unico
+let db = cone.database(); // para guardar la conexion
 let ninosRef = db.ref("tea");
+
+var audiopregunta = new Audio(require("../assets/sonido/pregunta.mp3"));
+var audiowin = new Audio(require("../assets/sonido/felicitaciones.mp3"));
 
 export default {
   name: "Contenido",
@@ -176,6 +181,7 @@ export default {
     audio: {
       type: String,
     },
+
     funcion: {
       type: Function,
     },
@@ -294,6 +300,16 @@ export default {
       }
     },
 
+    pregunta() {
+      audiopregunta.play();
+    },
+
+    win() {
+      audiowin.play();
+      //window.location.reload();
+      setTimeout("document.location.reload()", 10000);
+    },
+
     download() {
       axios({
         url: "https://conociendo-a-loly.web.app/cuento.pdf",
@@ -326,6 +342,17 @@ export default {
       });
     },
 
+    // guardar() {
+    //   db.ref("tea/").on("value", function (snapshot) {
+    //     console.log(snapshot.val());
+    //   });
+    // },
+
+    cerrar() {
+      Window.close();
+      //this.Window.close();
+    },
+
     addTea() {
       console.log("hola entre aqui");
       var x = document.getElementById("nombre").value;
@@ -340,41 +367,19 @@ export default {
         this.newTea.nombre = "general";
         this.newTea.edad = "n/a";
         ninosRef.push(this.newTea);
+
         this.newTea.nombre = "";
         this.newTea.edad = "";
         this.botonconfirmar = false;
+        this.win();
       } else {
         ninosRef.push(this.newTea);
+
         this.newTea.nombre = "";
         this.newTea.edad = "";
         this.botonconfirmar = false;
+        this.win();
       }
-
-      //
-      // console.log(this.newTea.nombre);
-      // console.log(this.newTea.edad);
-
-      // if (this.x === "" && this.y === "") {
-      //   this.x.value = "general";
-      //   this.y.value = "n/a";
-      //   this.newTea.nombre = x;
-      // this.newTea.edad = y;
-
-      //   ninosRef.push(this.newTea);
-      //   this.newTea.nombre = "";
-      //   this.newTea.edad = "";
-
-      //   console.log(this.newTea);
-      // } else {
-      //   this.name = false;
-      //   this.edad = false;
-      //   ninosRef.push(this.newTea);
-      //   this.newTea.nombre = "";
-      //   this.newTea.edad = "";
-
-      //   this.botonconfirmar = false;
-      //   console.log(this.newTea);
-      // }
     },
   },
   computed: {},
@@ -615,6 +620,14 @@ span {
   align-items: center;
 }
 
+.pbtn {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin-top: 0;
+  margin-right: 3px;
+}
+
 .des,
 .desp,
 .selecpersonaje {
@@ -706,11 +719,19 @@ span {
     width: 100%;
   }
 
+  .env {
+    font-size: 15pt;
+  }
   .tooltip {
     padding: 10px;
   }
+
+  .descargas {
+    display: block;
+    font-size: 10pt;
+  }
   .dato {
-    padding-top: 30px;
+    padding-top: 100px;
   }
 
   .elije {
@@ -721,6 +742,14 @@ span {
   }
   .checkeable img {
     width: 60px;
+  }
+
+  .bfu {
+    padding-top: 20px;
+    width: 13%;
+    margin: 7px;
+    padding-left: 3px;
+    padding-right: 16px;
   }
 }
 

@@ -5,12 +5,6 @@
     </div>
 
     <div class="pasta">
-      <!-- <span v-if="fle" v-on:click="contador = contador + 1" @click.prevent="next" class="flecha fdere">
-        <img v-show="avanzar" class="arrow" src="../assets/isq.png" alt />
-      </span>
-      <span v-if="fle" v-on:click="contador = contador - 1" @click.prevent="prev" class="flecha fisq">
-      <img class="arrow" src="../assets/der.png" alt />-->
-
       <span v-if="init && end" @click.prevent="next" class="flecha fdere">
         <img class="arrow" src="../assets/isq.png" alt />
       </span>
@@ -47,8 +41,6 @@
       </book>
     </div>
   </div>
-
-  <!-- :audio="prop.page.urlaudio" -->
 </template>
 
 <script>
@@ -62,12 +54,8 @@ export default {
 
   data() {
     return {
-      // fle: false,
-      // avanzar: true,
       init: false,
       end: false,
-
-      // contador: 0,
       page: 1,
       pages: [
         {
@@ -88,6 +76,8 @@ export default {
           creditos: true,
           cerrar: true,
           elejido: false,
+          sonido: true,
+          urlaudio: require("../assets/sonido/BIENVENIDA.mp3"),
         },
 
         {
@@ -104,9 +94,6 @@ export default {
           principal: false,
           home: true,
           sonido: true,
-
-          // title:
-          //   "Un día una linda lora nació de un huevo. Sus padres la llamaron Loly.",
           title: "",
           urlaudio: require("../assets/sonido/audio1.mp3"),
           pictogramas: [
@@ -124,7 +111,7 @@ export default {
             { url: require("../assets/padres.jpg"), name: "PADRES" },
             { url: require("../assets/la.jpg"), name: "LA" },
             { url: require("../assets/llamo.jpg"), name: "LLAMARON" },
-            { url: require("../assets/loly.png"), name: "LOLY" },
+            { url: require("../assets/loly.jpg"), name: "LOLY" },
           ],
         },
 
@@ -139,7 +126,6 @@ export default {
           cover: false,
           have_title: true,
           button: true,
-          // title: "Loly iba al parque con su mamá, jugaba sola o con sus amigos",
           title: "",
           urlaudio: require("../assets/sonido/audio2.mp3"),
           principal: false,
@@ -147,7 +133,7 @@ export default {
           home: true,
 
           pictogramas: [
-            { url: require("../assets/loly.png"), name: "LOLY" },
+            { url: require("../assets/loly.jpg"), name: "LOLY" },
             { url: require("../assets/ir.jpg"), name: "IBA" },
             { url: require("../assets/al.jpg"), name: "AL" },
             { url: require("../assets/parque.jpg"), name: "PARQUE" },
@@ -176,16 +162,13 @@ export default {
           button: true,
           principal: false,
           title: "",
-
-          // title:
-          //   "A Loly le gustaba estudiar mucho junto a sus compañeros de clase.",
           urlaudio: require("../assets/sonido/audio3.mp3"),
           sonido: true,
           home: true,
 
           pictogramas: [
             { url: require("../assets/a.jpg"), name: "A" },
-            { url: require("../assets/loly.png"), name: "LOLY" },
+            { url: require("../assets/loly.jpg"), name: "LOLY" },
             { url: require("../assets/le.jpg"), name: "LE" },
             { url: require("../assets/gusta.jpg"), name: "GUSTABA" },
             { url: require("../assets/estudiar.jpg"), name: "ESTUDIAR" },
@@ -212,8 +195,6 @@ export default {
           button: true,
           principal: false,
           title: "",
-
-          // title: "A menudo Loly Soñaba con ayudar a otros niños a aprender.",
           urlaudio: require("../assets/sonido/audio4.mp3"),
           sonido: true,
           home: true,
@@ -221,7 +202,7 @@ export default {
           pictogramas: [
             { url: require("../assets/a.jpg"), name: "A" },
             { url: require("../assets/amenudo.jpg"), name: "MENUDO" },
-            { url: require("../assets/loly.png"), name: "LOLY" },
+            { url: require("../assets/loly.jpg"), name: "LOLY" },
             { url: require("../assets/suenio.jpg"), name: "SOÑABA" },
             { url: require("../assets/conm.jpg"), name: "CON" },
             { url: require("../assets/ayudar.jpg"), name: "AYUDAR" },
@@ -246,8 +227,6 @@ export default {
           button: true,
           principal: false,
           title: "",
-
-          // title: "Ya de grande, Loly trabajó muy duro para cumplir sus sueños",
           urlaudio: require("../assets/sonido/audio5.mp3"),
           sonido: true,
           home: true,
@@ -255,7 +234,7 @@ export default {
           pictogramas: [
             { url: require("../assets/grande.jpg"), name: "YA" },
             { url: require("../assets/de.jpg"), name: "GRANDE" },
-            { url: require("../assets/loly.png"), name: "LOLY" },
+            { url: require("../assets/loly.jpg"), name: "LOLY" },
             { url: require("../assets/trabajar.jpg"), name: "TRABAJO " },
             { url: require("../assets/muy.jpg"), name: "MUY" },
             { url: require("../assets/duro.jpg"), name: "DURO" },
@@ -280,9 +259,6 @@ export default {
           principal: false,
           home: true,
           title: "",
-
-          // title:
-          //   "Y así creó al robot Loly-1.0, quien te ayudará a aprender jugando.",
           urlaudio: require("../assets/sonido/audio6.mp3"),
           sonido: true,
 
@@ -315,8 +291,6 @@ export default {
           sonido: true,
           home: true,
           title: "",
-
-          // title: "Junto a Loly-1.0 alcanzarás tus sueños al igual que ella.",
           urlaudio: require("../assets/sonido/audio7.mp3"),
 
           pictogramas: [
@@ -329,7 +303,7 @@ export default {
             { url: require("../assets/al.jpg"), name: "AL" },
             { url: require("../assets/igual.jpg"), name: "IGUAL" },
             { url: require("../assets/que.jpg"), name: "QUE" },
-            { url: require("../assets/loly.png"), name: "ELLA" },
+            { url: require("../assets/loly.jpg"), name: "ELLA" },
           ],
         },
         {
@@ -377,7 +351,6 @@ export default {
   },
   methods: {
     next() {
-      // console.log(this.contador);
       if (!this.$refs.book.animating) {
         this.init = true;
         this.end = true;
@@ -388,27 +361,10 @@ export default {
         }
         this.$refs.book.next();
         this.$refs.book.resetAnimateClass();
-        console.log("page: ", this.$refs.book.curPage);
       }
-      //this.flechaavanzar();
-      /*  this.contador = this.contador + 1;
-      console.log(contador); */
-      //this.benvi = false;
     },
 
-    // flechaavanzar() {
-    //   if (this.fle == false) {
-    //     this.fle = true;
-    //   }
-
-    //   if (this.contador == 7) {
-    //     this.fle = false;
-    //   }
-    // },
-
     prev() {
-      // console.log(this.contador);
-      //console.log(this.pages.length);
       if (!this.$refs.book.animating) {
         if (this.$refs.book.curPage === 2) {
           this.init = false;
@@ -421,16 +377,6 @@ export default {
         this.$refs.book.prev();
         this.$refs.book.resetAnimateClass();
       }
-
-      // if (this.contador === -1) {
-      //   this.fle = false;
-      // }
-
-      // if (this.contador < 7) {
-      //   this.avanzar = true;
-      // }
-      // this.contador = this.contador - 1;
-      // console.log(contador);
     },
   },
   mounted: function () {},
@@ -524,6 +470,19 @@ export default {
 @media only screen and (orientation: landscape) {
   .alert {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .arrow {
+    width: 90px;
+    height: auto;
+  }
+  .fisq {
+    left: -16px;
+  }
+  .fdere {
+    right: -8px;
   }
 }
 

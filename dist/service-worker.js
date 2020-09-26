@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.357436978ac6916fed227078ffc471f2.js"
+  "/precache-manifest.d2a784f72b54a4597206a3fd9e1017e1.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "lolytest"});
